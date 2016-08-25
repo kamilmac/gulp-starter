@@ -3,7 +3,9 @@
         "target": "es5",
         "module": "commonjs",
         "experimentalDecorators": true,
-        "sourceMap": true
+        "sourceMap": true,
+        "jsx": "react",
+        "allowSyntheticDefaultImports": true
     },
     "inlineSourceMap": true,
     "exclude": [

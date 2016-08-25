@@ -12,7 +12,7 @@ const SRC = "./src",
     SRC_CSS = `${SRC}/css`,
     PATH = {
         index: "./index.html",
-        tsAll: `${SRC_TS}/*.ts`,
+        tsAll: `${SRC_TS}/*.ts?`,
         cssAll: `${SRC_CSS}/*.css`,
         jsEntry: `${SRC_TS}/main.js`,
         cssEntry: `${SRC_CSS}/index.css`,
@@ -39,7 +39,11 @@ gulp.task("cssnext:cssbundle", () => gulp.src(PATH.cssEntry)
 
 gulp.task('serve', () => {
     browserSync.init({server: "./"})
-    gulp.watch([PATH.index, PATH.jsBundle, PATH.cssBundle]).on('change', browserSync.reload)
+    gulp.watch([
+        PATH.index, 
+        PATH.jsBundle, 
+        PATH.cssBundle
+    ]).on('change', browserSync.reload)
     gulp.watch(PATH.tsAll, gulp.series(["ts:js", "js:jsbundle"]))
     gulp.watch(PATH.cssAll, gulp.series(["cssnext:cssbundle"]))
 })

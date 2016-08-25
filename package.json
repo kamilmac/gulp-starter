@@ -16,5 +16,10 @@
     "gulp-cssnext": "^1.0.1",
     "gulp-rename": "^1.2.2",
     "tsify": "^1.0.3"
+  },
+  "dependencies": {
+    "mobx": "^2.4.4",
+    "react": "^15.3.1",
+    "react-dom": "^15.3.1"
   }
 }
