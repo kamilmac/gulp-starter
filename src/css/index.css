@@ -1,0 +1,7 @@
+@import "foo.css";
+
+.hello {
+    display:flex;
+    flex-flow: column;
+    flex-wrap: 1; 
+}
