@@ -7,4 +7,3 @@ render(
 	<Hello/>,
 	document.getElementById('app')
 )
-
