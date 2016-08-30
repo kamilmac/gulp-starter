@@ -1,40 +1,44 @@
 const 
-	gulp = require('gulp'),
-	cssnext = require('gulp-cssnext'),
-	babel = require('gulp-babel'),
-	browserSync = require('browser-sync').create(),
-	rename = require('gulp-rename')
-	browserify = require('browserify'),
-	babelify = require('babelify'),
-	source = require('vinyl-source-stream')
-
-const 
-	SRC = './src',
-	DIST = './dist',
-	SRC_JS = `${SRC}/js`,
-	SRC_CSS = `${SRC}/css`,
+	gulp 			= require('gulp'),
+	babel 			= require('gulp-babel'),
+	postcss 		= require('gulp-postcss'),
+	browserSync 	= require('browser-sync').create(),
+	rename 			= require('gulp-rename')
+	browserify 		= require('browserify'),
+	babelify 		= require('babelify'),
+	source 			= require('vinyl-source-stream'),
+	SRC 			= './src',
+	DIST 			= './dist',
+	SRC_JS 			= `${SRC}/js`,
+	SRC_CSS 		= `${SRC}/css`,
 	PATH = {
-		index: './index.html',
-		jsxAll: `${SRC_JS}/*.jsx`,
-		cssAll: `${SRC_CSS}/*.css`,
-		jsxEntry: `${SRC_JS}/main.jsx`,
-		cssEntry: `${SRC_CSS}/index.css`,
-		jsBundle: `${DIST}/bundle.js`,
-		cssBundle: `${SRC_CSS}/bundle.css`,
+		index: 		'./index.html',
+		jsxAll: 	`${SRC_JS}/*.jsx`,
+		cssAll: 	`${SRC_CSS}/*.css`,
+		jsxEntry: 	`${SRC_JS}/main.jsx`,
+		cssEntry: 	`${SRC_CSS}/index.css`,
+		jsBundle: 	`${DIST}/bundle.js`,
+		cssBundle: 	`${DIST}/bundle.css`,
 	}
 
 gulp.task('jsx:jsbundle', () => browserify({entries: PATH.jsxEntry, debug: true})
 	.transform('babelify', {
 		presets: ['es2015'],
 		plugins: ['transform-react-jsx']
-	})
-	.bundle()
+	}).bundle()
 	.pipe(source('bundle.js'))
 	.pipe(gulp.dest(DIST))
 )
 
 gulp.task('cssnext:cssbundle', () => gulp.src(PATH.cssEntry)
-	.pipe(cssnext({compress: true}))
+	.pipe(postcss([
+		require("postcss-import")(),
+		require("postcss-url")(),
+		require("postcss-cssnext")(),
+		// require("cssnano")(),
+		require("postcss-browser-reporter")(),
+		require("postcss-reporter")(),
+	]))
 	.pipe(rename('bundle.css'))        
 	.pipe(gulp.dest(DIST))
 )

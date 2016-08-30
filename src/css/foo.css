@@ -1,3 +1,29 @@
 .world {
     display: none;
 }
+
+.iconContainer {
+    display: flex;
+    & h1 {
+        display: none;
+    } 
+}
+
+.icon {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+}
+
+@media (width >= 700px) and (width <= 1200px) {
+    .icon {
+        justify-content: flex-end;
+    }
+    .icon circle {
+        fill: black;
+    }
+    .iconContainer h1 {
+        display: flex;
+        flex-grow: 16;
+    }
+}
