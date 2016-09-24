@@ -1,6 +1,5 @@
 const 
 	gulp 			= require('gulp'),
-	babel 			= require('gulp-babel'),
 	postcss 		= require('gulp-postcss'),
 	browserSync 	= require('browser-sync').create(),
 	rename 			= require('gulp-rename')
@@ -21,27 +20,26 @@ const
 		cssBundle: 	`${DIST}/bundle.css`,
 	}
 
+
 gulp.task('jsx:jsbundle', () => browserify({entries: PATH.jsxEntry, debug: true})
 	.transform('babelify', {
 		presets: ['es2015'],
-		plugins: ['transform-react-jsx']
+		plugins: ['transform-react-jsx'],
 	}).bundle()
 	.pipe(source('bundle.js'))
 	.pipe(gulp.dest(DIST))
 )
 
+
 gulp.task('cssnext:cssbundle', () => gulp.src(PATH.cssEntry)
 	.pipe(postcss([
 		require("postcss-import")(),
-		require("postcss-url")(),
 		require("postcss-cssnext")(),
-		// require("cssnano")(),
-		require("postcss-browser-reporter")(),
-		require("postcss-reporter")(),
 	]))
 	.pipe(rename('bundle.css'))        
 	.pipe(gulp.dest(DIST))
 )
+
 
 gulp.task('serve', () => {
 	browserSync.init({server: './'})
@@ -53,6 +51,7 @@ gulp.task('serve', () => {
 	gulp.watch(PATH.jsxAll, gulp.series(['jsx:jsbundle']))
 	gulp.watch(PATH.cssAll, gulp.series(['cssnext:cssbundle']))
 })
+
 
 gulp.task('default', 
 	gulp.series([

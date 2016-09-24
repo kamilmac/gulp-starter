@@ -1,6 +1,6 @@
 import React from 'react'
 import {render} from 'react-dom'
-import anime from 'animejs'
+// import anime from 'animejs'
 
 export const Tab = () => <div className="iconContainer">
 		<h1>HELLO</h1>
