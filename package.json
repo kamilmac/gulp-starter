@@ -9,7 +9,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
+  "dependencies": {
     "babel-plugin-transform-react-jsx": "*",
     "babel-preset-es2015": "*",
     "babelify": "*",
@@ -20,9 +20,7 @@
     "gulp-rename": "*",
     "postcss-cssnext": "*",
     "postcss-import": "*",
-    "vinyl-source-stream": "*"
-  },
-  "dependencies": {
+    "vinyl-source-stream": "*",
     "mobx": "*",
     "react": "*",
     "react-dom": "*"
